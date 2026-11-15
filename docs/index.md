@@ -5,17 +5,19 @@ Prepared by: Panga Keerthi
 GitHub Repository: keerthi-flyrank-ml-internship-2026
 ---
 1. Abstract
-This project develops a machine-learning-assisted workflow to prioritize website content items for human review and possible refresh. The work uses an anonymized FlyRank internship dataset containing 30,000 content records across 32 pseudonymized clients.
-The target label, `is_declining_label`, is defined from the recorded trend direction: it is 1 when `trend_direction` is "down" and 0 otherwise. A client-holdout validation strategy is used to evaluate whether models can identify records associated with the declining label.
-Three classifiers—Decision Tree, Logistic Regression, and Random Forest—are compared using Precision@50 as the primary selection metric, with ROC-AUC and Average Precision as additional measures.
-Random Forest achieves the highest Precision@50 of 0.74, compared with 0.58 for Decision Tree, 0.40 for Logistic Regression, and 0.24 for the baseline ranking.
-The resulting ranked queue is intended to support analyst review, not to make automatic content changes or guarantee future performance.
+## 1. Abstract
+
+FlyRank's content operations involve identifying content items that may be declining and prioritizing them for review. This project investigates whether machine learning can improve the prioritization of potentially declining content compared with a rule-based baseline. Using an anonymized dataset of 30,000 content records, we developed and evaluated Logistic Regression, Decision Tree, and Random Forest models using a client-holdout validation strategy. The Random Forest model achieved a Precision@50 of 0.74, compared with 0.24 for the baseline, on the evaluation dataset. These findings suggest that machine learning can support a more focused content-review process, while final decisions should remain with human reviewers.
 2. Introduction / Problem Statement
-Websites can contain large numbers of pages, and reviewing every page with the same level of attention is often impractical. Some content items may show signs of declining performance and may deserve earlier investigation.
-The problem addressed in this capstone is to rank content records according to how strongly their available characteristics are associated with the dataset's recorded declining label.
-The project compares a rule-based baseline with supervised machine-learning models and produces a ranked refresh queue with supporting scores and reason information.
-The objective is to help analysts identify which content items should be reviewed first. The model is a decision-support tool and does not make automatic content changes.
-The project does not claim to forecast guaranteed future traffic loss. The label is derived from the observed `trend_direction` field in the supplied dataset.
+## 2. Introduction / Problem Statement
+
+Content performance can change over time. Some previously performing content items may experience declining visibility or engagement, making it important for content teams to identify which items may need attention.
+
+For FlyRank's content operations, reviewing a large number of content items manually can make prioritization difficult. A systematic approach can help analysts identify potentially declining content and organize it into a ranked review queue.
+
+This project explores how machine learning can support this process. It compares a rule-based baseline with three machine learning models: Logistic Regression, Decision Tree, and Random Forest. The models use historical content-performance signals to identify records associated with a declining trend.
+
+The project uses an anonymized dataset containing 30,000 content records. The objective is to evaluate whether machine learning can improve the prioritization of content for human review. The resulting predictions are intended as decision-support signals, not automatic instructions to modify content.
 3. Data
 The project uses the anonymized content-refresh dataset supplied for the FlyRank Machine Learning Internship.
 The raw dataset contains:
